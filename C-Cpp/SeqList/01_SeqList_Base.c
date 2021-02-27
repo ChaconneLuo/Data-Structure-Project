@@ -42,7 +42,7 @@ void Read(SeqList *S, int ElementNumber)
 
 void Insert(SeqList *S, int Position, int e)
 {
-	if (Position < 0 || Position > S->Last)
+	if (Position < 0 || Position > S->Last + 1 || Position > MAXSIZE - 1)
 	{
 		exit(0);
 	}
@@ -52,6 +52,31 @@ void Insert(SeqList *S, int Position, int e)
 	}
 	S->Data[Position - 1] = e;
 	S->Last++;
+}
+
+void Delete_Position(SeqList *S, int Position)
+{
+	if (Position < 0 || Position > S->Last + 1 || Position > MAXSIZE - 1)
+	{
+		exit(0);
+	}
+	//*e = S->Data[Position - 1];
+	for(int i = Position - 1; i <= S->Last; i++)
+	{
+		S->Data[i] = S->Data[i + 1];
+	}
+	S->Last--;
+}
+
+void Delete_Element(SeqList *S, int e)
+{
+	for(int j = 0; j <= S->Last; j++)
+	{
+		if(S->Data[j] == e)
+		{
+			Delete_Position(S, j + 1);
+		}
+	}
 }
 
 void Print(SeqList *s)
