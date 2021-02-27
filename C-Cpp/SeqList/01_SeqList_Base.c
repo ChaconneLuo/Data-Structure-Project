@@ -22,19 +22,19 @@ SeqList *Init()
 
 int SeqList_Length(SeqList *s)
 {
-	return (s->Last + 1);	
-} 
+	return (s->Last + 1);
+}
 
 void Read(SeqList *S, int ElementNumber)
 {
-	if(ElementNumber < 0 || ElementNumber > MAXSIZE - 1)
+	if (ElementNumber < 0 || ElementNumber > MAXSIZE - 1)
 	{
 		exit(0);
 	}
-	for(int i = 0; i < ElementNumber; i++)
+	for (int i = 0; i < ElementNumber; i++)
 	{
 		int tmp;
-		scanf("%d",&tmp);
+		scanf("%d", &tmp);
 		S->Data[i] = tmp;
 		S->Last++;
 	}
@@ -42,34 +42,35 @@ void Read(SeqList *S, int ElementNumber)
 
 void Insert(SeqList *S, int Position, int e)
 {
-	if(Position < 0 || Position > S->Last)
+	if (Position < 0 || Position > S->Last)
 	{
 		exit(0);
 	}
-	for(int i = S->Last; i >= Position - 1; i--)
+	for (int i = S->Last; i >= Position - 1; i--)
 	{
-		S->Data[i+1] = S->Data[i];
+		S->Data[i + 1] = S->Data[i];
 	}
 	S->Data[Position - 1] = e;
+	S->Last++;
 }
 
 void Print(SeqList *s)
 {
-	if(s->Last >= 0)
+	if (s->Last >= 0)
 	{
-		for(int j = 0; j <= s->Last; j++)
+		for (int j = 0; j <= s->Last; j++)
 		{
-			printf("%d ",s->Data[j]);
+			printf("%d ", s->Data[j]);
 		}
 	}
 }
 
 int main(void)
 {
-	int ElementNumber; 		//元素个数
+	int ElementNumber; //元素个数
 	SeqList *S = Init();
 	scanf("%d", &ElementNumber);
-	Read(S,ElementNumber);
+	Read(S, ElementNumber);
 	Print(S);
 	return 0;
 }
