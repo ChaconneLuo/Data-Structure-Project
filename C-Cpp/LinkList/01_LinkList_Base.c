@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct node
 {
@@ -56,6 +57,101 @@ void PrintLinkList(Node *head)
 		printf("%d ", FPoint->Data);
 		FPoint = FPoint->Next;
 	}
+}
+bool ListEmpty(Node *head)
+{
+	return head->Next == NULL;
+}
+
+void ClearList(Node *head)
+{
+	Node *tmp = head->Next;
+	while (tmp)
+	{
+		tmp = tmp->Next;
+		free(head);
+		head = tmp;
+	}
+}
+
+int GetElem(Node *head, int Position, int *e)
+{
+	Node *p = head;
+	for (int i = 0; i < Position; i++)
+	{
+		p = p->Next;
+		if (p == NULL)
+		{
+			exit(0);
+		}
+		if (i == Position - 1)
+		{
+			e = p->Data;
+			return p->Data;
+		}
+	}
+}
+
+bool LocateElem(Node *head, int e)
+{
+	Node *tmp = head->Next;
+	while (tmp)
+	{
+		if (tmp->Data == e)
+		{
+			return true;
+		}
+		tmp = tmp->Next;
+	}
+	return false;
+}
+
+void ListInsert(Node *head, int Position, int Elem)
+{
+	Node *p = head;
+	for (int i = 0; i < Position; i++)
+	{
+		p = p->Next;
+		if (p == NULL)
+		{
+			exit(0);
+		}
+		if (i == Position - 1)
+		{
+			Node *tmp = (int *)malloc(sizeof(Node));
+			tmp->Data = Elem;
+			tmp->Next = p->Next;
+			p->Next = tmp;
+		}
+	}
+}
+
+void ListDelete(Node *head, int Position, int *Elem)
+{
+	Node *p = head;
+	for (int i = 1; i < Position; i++)
+	{
+		p = p->Next;
+		if (p == NULL)
+		{
+			exit(0);
+		}
+	}
+	Node *t = p->Next;
+	p->Next = p->Next->Next;
+	free(t);
+}
+
+int ListLength(Node *head)
+{
+	Node *p = head->Next;
+	int cnt = 1;
+	while (p)
+	{
+		p = p->Next;
+		cnt++;
+	}
+	return cnt;
 }
 
 int main(void)

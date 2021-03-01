@@ -61,7 +61,7 @@ void Delete_Position(SeqList *S, int Position)
 		exit(0);
 	}
 	//*e = S->Data[Position - 1];
-	for(int i = Position - 1; i <= S->Last; i++)
+	for (int i = Position - 1; i <= S->Last; i++)
 	{
 		S->Data[i] = S->Data[i + 1];
 	}
@@ -70,9 +70,9 @@ void Delete_Position(SeqList *S, int Position)
 
 void Delete_Element(SeqList *S, int e)
 {
-	for(int j = 0; j <= S->Last; j++)
+	for (int j = 0; j <= S->Last; j++)
 	{
-		if(S->Data[j] == e)
+		if (S->Data[j] == e)
 		{
 			Delete_Position(S, j + 1);
 		}
@@ -88,6 +88,48 @@ void Print(SeqList *s)
 			printf("%d ", s->Data[j]);
 		}
 	}
+}
+
+int GetElem(SeqList *S, int Position)
+{
+	if (Position > S->Last || Position <= 0)
+	{
+		exit(0);
+	}
+	else
+	{
+		return S->Data[Position - 1];
+	}
+}
+
+bool ListEmpty(SeqList *S)
+{
+	if (S->Last < 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void ClearList(SeqList *S)
+{
+	memset(S->Data, 0, sizeof(S->Data));
+	S->Last = -1;
+}
+
+bool LocateElem(SeqList *S, int e)
+{
+	for (int i = 0; i <= S->Last, i++)
+	{
+		if (S->Data[i] == e)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 int main(void)
